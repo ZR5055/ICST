@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ICST University - Home</title>
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" xintegrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        :root {
+            --icst-blue: #002147;
+            --icst-light-blue: #007bff;
+            --icst-yellow: #ffc107;
+            --icst-dark-text: #343a40;
+            --icst-light-bg: #f8f9fa;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--icst-light-bg);
+            color: var(--icst-dark-text);
+            line-height: 1.6; /* Improved readability */
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--icst-blue);
+            line-height: 1.2;
+        }
+
+        .navbar {
+            background-color: var(--icst-blue);
+            box-shadow: 0 2px 8px rgba(0,0,0,.15); /* Slightly stronger shadow */
+        }
+        .navbar-brand, .nav-link {
+            color: #ffffff !important;
+            font-weight: 600;
+            transition: color 0.3s ease; /* Smooth hover */
+        }
+        .navbar-brand:hover, .nav-link:hover {
+            color: var(--icst-yellow) !important;
+        }
+        .btn-primary {
+            background-color: var(--icst-light-blue);
+            border-color: var(--icst-light-blue);
+            border-radius: 0.75rem; /* Slightly more rounded */
+            transition: all 0.3s ease;
+            padding: 0.75rem 1.5rem; /* Better button size */
+            font-weight: 600;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+            transform: translateY(-3px); /* More pronounced lift */
+            box-shadow: 0 6px 12px rgba(0, 123, 255, 0.3); /* Stronger shadow on hover */
+        }
+        .btn-outline-light {
+            border-radius: 0.75rem;
+            padding: 0.75rem 1.5rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .btn-outline-light:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(255, 255, 255, 0.1);
+        }
+
+        .hero-section {
+            position: relative;
+            height: 85vh; /* Slightly taller hero */
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+            background-color: var(--icst-blue); /* Fallback background */
+        }
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.75)); /* Darker gradient overlay */
+            z-index: 1;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            padding: 2rem;
+            max-width: 900px; /* Wider content area */
+        }
+        .hero-content h1 {
+            font-size: clamp(2.8rem, 6vw, 5rem); /* Larger responsive font size */
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.6); /* Stronger text shadow */
+            color: #fff; /* Ensure white text */
+        }
+        .hero-content p {
+            font-size: clamp(1.2rem, 2.8vw, 1.6rem); /* Slightly larger lead text */
+            margin-bottom: 2.5rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            color: rgba(255, 255, 255, 0.9); /* Slightly transparent white */
+        }
+        .carousel-item img {
+            width: 100%;
+            height: 85vh; /* Match hero height */
+            object-fit: cover;
+            filter: brightness(0.8); /* Slightly dim images for better overlay contrast */
+        }
+        section {
+            padding: 6rem 0; /* More vertical padding for sections */
+        }
+        .section-heading {
+            font-size: 3rem; /* Larger section headings */
+            font-weight: 700;
+            color: var(--icst-blue);
+            margin-bottom: 4rem; /* More space below heading */
+            position: relative;
+            padding-bottom: 0.75rem; /* Thicker underline space */
+        }
+        .section-heading::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 0;
+            width: 100px; /* Wider underline */
+            height: 5px; /* Thicker underline */
+            background-color: var(--icst-yellow);
+            border-radius: 3px;
+        }
+        .card {
+            border: none;
+            border-radius: 1.25rem; /* More rounded cards */
+            box-shadow: 0 0.75rem 1.5rem rgba(0,0,0,.1); /* Stronger default shadow */
+            transition: all 0.4s ease; /* Slower, smoother transition */
+            overflow: hidden;
+        }
+        .card:hover {
+            transform: translateY(-8px); /* More pronounced lift on hover */
+            box-shadow: 0 1.5rem 3rem rgba(0,0,0,.2); /* Stronger shadow on hover */
+        }
+        .card-img-top {
+            border-top-left-radius: 1.25rem;
+            border-top-right-radius: 1.25rem;
+            height: 220px; /* Slightly taller card images */
+            object-fit: cover;
+        }
+        .card-body {
+            padding: 2rem; /* More padding inside card body */
+        }
+        .icon-large {
+            font-size: 3.5rem; /* Larger icons */
+            color: var(--icst-light-blue);
+            margin-bottom: 1.5rem;
+        }
+        .footer {
+            background-color: var(--icst-blue);
+            color: #ffffff;
+            padding: 4rem 0; /* More padding for footer */
+            font-size: 0.95rem; /* Slightly larger footer text */
+            line-height: 1.8; /* Better readability */
+        }
+        .footer a {
+            color: #ffffff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .footer a:hover {
+            color: var(--icst-yellow);
+        }
+        .social-icons a {
+            color: #ffffff;
+            font-size: 1.8rem; /* Larger social icons */
+            margin: 0 1rem; /* More space between icons */
+            transition: color 0.3s ease, transform 0.2s ease;
+        }
+        .social-icons a:hover {
+            color: var(--icst-yellow);
+            transform: translateY(-3px);
+        }
+        /* Custom Call to Action Block */
+        .cta-block {
+            background: linear-gradient(45deg, #007bff, #0056b3); /* Blue gradient */
+            color: #fff;
+            padding: 6rem 0; /* More padding */
+            border-radius: 1.5rem;
+            margin-bottom: 6rem; /* More margin below */
+            box-shadow: 0 1.5rem 3rem rgba(0, 123, 255, 0.4); /* Stronger shadow */
+            text-align: center;
+        }
+        .cta-block h2 {
+            font-size: 3.5rem; /* Larger heading */
+            font-weight: 700;
+            margin-bottom: 2rem;
+            color: #fff; /* Ensure white text */
+        }
+        .cta-block p {
+            font-size: 1.3rem; /* Larger text */
+            margin-bottom: 3rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .cta-block .btn {
+            font-size: 1.2rem; /* Larger buttons */
+            padding: 1rem 2.5rem; /* More padding */
+            border-radius: 2.5rem; /* More rounded */
+            background-color: var(--icst-yellow);
+            border-color: var(--icst-yellow);
+            color: var(--icst-blue);
+            font-weight: 700; /* Bolder text */
+            transition: all 0.3s ease;
+        }
+        .cta-block .btn:hover {
+            background-color: #e0a800;
+            border-color: #e0a800;
+            color: var(--icst-blue);
+            transform: translateY(-4px); /* More pronounced lift */
+            box-shadow: 0 8px 16px rgba(255, 193, 7, 0.4); /* Stronger shadow */
+        }
+
+        /* Responsive adjustments for smaller screens */
+        @media (max-width: 992px) { /* Adjust breakpoint for navbar collapse */
+            .navbar-collapse {
+                background-color: var(--icst-blue);
+                padding: 1rem;
+                border-radius: 0.5rem;
+                margin-top: 0.5rem;
+            }
+            .navbar-nav .nav-item {
+                margin-bottom: 0.5rem;
+            }
+            .navbar-nav .btn-primary {
+                width: 100%;
+            }
+            .hero-section {
+                height: 70vh;
+            }
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            .hero-content p {
+                font-size: 1.1rem;
+            }
+            .section-heading {
+                font-size: 2.5rem;
+            }
+            .cta-block h2 {
+                font-size: 2.5rem;
+            }
+            .cta-block p {
+                font-size: 1.1rem;
+            }
+            .footer .col-md-4 {
+                margin-bottom: 2rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .section-heading {
+                font-size: 2rem;
+            }
+            .cta-block h2 {
+                font-size: 2rem;
+            }
+            .cta-block .btn {
+                font-size: 1rem;
+                padding: 0.75rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <i class="fas fa-graduation-cap me-2"></i> <!-- University icon -->
+                ICST University
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#academics">Academics</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#admissions">Admissions</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#research">Research</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#campus-life">Campus Life</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#news-events">News & Events</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                    <li class="nav-item ms-lg-3">
+                        <a class="btn btn-primary" href="#apply">Apply Now</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section with Carousel -->
+    <section id="home" class="hero-section">
+        <div id="heroCarousel" class="carousel slide carousel-fade w-100 h-100" data-bs-ride="carousel" data-bs-interval="5000">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="https://icst.edu.lk/wp-content/uploads/2023/12/DSC09934-scaled-480x320.jpg" class="d-block w-100" alt="Campus View">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://images.squarespace-cdn.com/content/v1/5770fb98bebafbef665cb19a/1693556141809-L2GB2EBZHOH5U205ZSZN/Stats+Nurse+Banner.jpg" class="d-block w-100" alt="Research Lab">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://rma.edu/wp-content/uploads/2021/06/June-9-coed-private-school-scaled.jpg" class="d-block w-100" alt="Students on Campus">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 class="animate_animated animate_fadeInDown">Welcome to ICST University</h1>
+            <p class="lead animate_animated animate_fadeInUp">
+                Empowering minds, fostering innovation, and shaping a brighter future for all.
+            </p>
+            <a href="#academics" class="btn btn-primary btn-lg animate_animated animate_zoomIn">Explore Programs</a>
+            <a href="#apply" class="btn btn-outline-light btn-lg ms-3 animate_animated animate_zoomIn">Apply Now</a>
+        </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section id="about" class="container text-center">
+        <h2 class="section-heading">About ICST University</h2>
+        <div class="row align-items-center mt-5">
+            <div class="col-md-6 mb-4 mb-md-0">
+                <img src="https://icst.edu.lk/wp-content/uploads/2023/12/06-scaled-480x320.jpg" class="img-fluid rounded-xl shadow-lg" alt="ICST University Campus">
+            </div>
+            <div class="col-md-6 text-start">
+                <p class="lead">
+                    ICST University is a beacon of academic excellence, dedicated to providing a transformative educational experience. Since our founding in [Year], we have been committed to fostering critical thinking, creativity, and a global perspective in our students.
+                </p>
+                <p>
+                    Our diverse community of scholars, researchers, and innovators collaborates to address the world's most pressing challenges. We pride ourselves on our state-of-the-art facilities, renowned faculty, and a vibrant campus culture that supports personal and professional growth.
+                </p>
+                <a href="#" class="btn btn-primary mt-3">Learn More About Us</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Academics Section -->
+    <section id="academics" class="bg-light">
+        <div class="container text-center">
+            <h2 class="section-heading">Our Academic Programs</h2>
+            <p class="lead mb-5">Discover a wide range of programs designed to prepare you for success in a rapidly changing world.</p>
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                <!-- Academic Card 1 -->
+                <div class="col">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <i class="fas fa-microchip icon-large"></i>
+                            <h5 class="card-title fw-bold mt-3">Engineering & Technology</h5>
+                            <p class="card-text">Pioneering solutions in software, hardware, and sustainable engineering.</p>
+                            <a href="#" class="btn btn-outline-primary btn-sm mt-3">View Programs</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Academic Card 2 -->
+                <div class="col">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <i class="fas fa-book-open icon-large"></i>
+                            <h5 class="card-title fw-bold mt-3">Arts & Humanities</h5>
+                            <p class="card-text">Exploring culture, history, and creative expression through diverse disciplines.</p>
+                            <a href="#" class="btn btn-outline-primary btn-sm mt-3">View Programs</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Academic Card 3 -->
+                <div class="col">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <i class="fas fa-chart-line icon-large"></i>
+                            <h5 class="card-title fw-bold mt-3">Business & Economics</h5>
+                            <p class="card-text">Developing future leaders with strong analytical and strategic skills.</p>
+                            <a href="#" class="btn btn-outline-primary btn-sm mt-3">View Programs</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Academic Card 4 -->
+                <div class="col">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <i class="fas fa-flask icon-large"></i>
+                            <h5 class="card-title fw-bold mt-3">Sciences</h5>
+                            <p class="card-text">Advancing knowledge in natural sciences, mathematics, and environmental studies.</p>
+                            <a href="#" class="btn btn-outline-primary btn-sm mt-3">View Programs</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Academic Card 5 -->
+                <div class="col">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <i class="fas fa-gavel icon-large"></i>
+                            <h5 class="card-title fw-bold mt-3">Law & Public Policy</h5>
+                            <p class="card-text">Shaping justice and governance for a better society.</p>
+                            <a href="#" class="btn btn-outline-primary btn-sm mt-3">View Programs</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Academic Card 6 -->
+                <div class="col">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <i class="fas fa-stethoscope icon-large"></i>
+                            <h5 class="card-title fw-bold mt-3">Health Sciences</h5>
+                            <p class="card-text">Training compassionate and skilled healthcare professionals.</p>
+                            <a href="#" class="btn btn-outline-primary btn-sm mt-3">View Programs</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Admissions Section -->
+    <section id="admissions" class="container text-center">
+        <h2 class="section-heading">Admissions & Aid</h2>
+        <p class="lead mb-5">Your journey to ICST University starts here. Find out everything you need to apply.</p>
+        <div class="row align-items-center">
+            <div class="col-md-6 mb-4 mb-md-0">
+                <img src="https://sortsmart.com/content/1-blog/5-the-14-golden-rules-for-effective-applicant-screening-in-university-admissions/admissions-assessment.jpg" class="img-fluid rounded-xl shadow-lg" alt="Admissions Guidance">
+            </div>
+            <div class="col-md-6 text-start">
+                <h3 class="fw-bold mb-3">How to Apply</h3>
+                <p>
+                    Applying to ICST University is a straightforward process. We encourage prospective students to review our admission requirements, application deadlines, and scholarship opportunities. Our admissions team is here to guide you every step of the way.
+                </p>
+                <ul class="list-unstyled">
+                    <li class="mb-2"><i class="fas fa-check-circle text-primary me-2"></i> Online Application Form</li>
+                    <li class="mb-2"><i class="fas fa-check-circle text-primary me-2"></i> Required Documents Checklist</li>
+                    <li class="mb-2"><i class="fas fa-check-circle text-primary me-2"></i> Important Deadlines</li>
+                </ul>
+                <a href="#" class="btn btn-primary mt-3 me-2">Apply Now</a>
+                <a href="#" class="btn btn-outline-secondary mt-3">Request Information</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Research & Innovation Section -->
+    <section id="research" class="bg-light">
+        <div class="container text-center">
+            <h2 class="section-heading">Research & Innovation</h2>
+            <p class="lead mb-5">At ICST, we are at the forefront of discovery, driving innovation that impacts the world.</p>
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                <!-- Research Card 1 -->
+                <div class="col">
+                    <div class="card h-100">
+                        <img src="https://sortsmart.com/content/1-blog/5-the-14-golden-rules-for-effective-applicant-screening-in-university-admissions/admissions-assessment.jpg" class="card-img-top" alt="AI Research">
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold">Artificial Intelligence Lab</h5>
+                            <p class="card-text">Leading advancements in machine learning, neural networks, and robotics.</p>
+                            <a href="#" class="btn btn-outline-primary btn-sm">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Research Card 2 -->
+                <div class="col">
+                    <div class="card h-100">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLzZFcOvtgb9ZtBHXrxOX1l5NrM4RompcLkQ&s" class="card-img-top" alt="Sustainable Technology">
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold">Sustainable Technologies Institute</h5>
+                            <p class="card-text">Developing eco-friendly solutions for energy, environment, and urban planning.</p>
+                            <a href="#" class="btn btn-outline-primary btn-sm">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Research Card 3 -->
+                <div class="col">
+                    <div class="card h-100">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/f/f2/Love_what_you_do.jpg" class="card-img-top" alt="Biomedical Innovations">
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold">Biomedical Research Center</h5>
+                            <p class="card-text">Revolutionizing healthcare through cutting-edge biomedical and genetic research.</p>
+                            <a href="#" class="btn btn-outline-primary btn-sm">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a href="#" class="btn btn-primary mt-5">Discover All Research</a>
+        </div>
+    </section>
+
+    <!-- Campus Life Section -->
+    <section id="campus-life" class="container text-center">
+        <h2 class="section-heading">Campus Life & Student Experience</h2>
+        <p class="lead mb-5">Experience a vibrant and supportive community that extends beyond the classroom.</p>
+        <div class="row align-items-center">
+            <div class="col-md-6 mb-4 mb-md-0">
+                <img src="https://www.mycism.com/wp-content/uploads/2020/10/student-club-canada-cism.jpg" class="img-fluid rounded-xl shadow-lg" alt="Student Clubs">
+            </div>
+            <div class="col-md-6 text-start">
+                <h3 class="fw-bold mb-3">Engage, Connect, Thrive</h3>
+                <p>
+                    ICST University offers a rich tapestry of student organizations, athletic programs, arts and culture events, and leadership opportunities. We believe that a well-rounded education includes experiences that foster personal growth, build friendships, and create lasting memories.
+                </p>
+                <ul class="list-unstyled">
+                    <li class="mb-2"><i class="fas fa-users text-primary me-2"></i> Over 100 Student Clubs & Organizations</li>
+                    <li class="mb-2"><i class="fas fa-futbol text-primary me-2"></i> NCAA Division I Athletics</li>
+                    <li class="mb-2"><i class="fas fa-music text-primary me-2"></i> Arts, Music & Theatre Programs</li>
+                    <li class="mb-2"><i class="fas fa-handshake text-primary me-2"></i> Community Service & Volunteering</li>
+                </ul>
+                <a href="#" class="btn btn-primary mt-3">Explore Campus Life</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- News & Events Section -->
+    <section id="news-events" class="bg-light">
+        <div class="container text-center">
+            <h2 class="section-heading">Latest News & Events</h2>
+            <p class="lead mb-5">Stay updated with the latest happenings at ICST University.</p>
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                <!-- News Card 1 -->
+                <div class="col">
+                    <div class="card h-100">
+                        <img src="https://commencement.ucsc.edu/files/2025/01/05-14-24_Elia_Patty_Naranjo-Best_Grad_Photo_17-2.jpg" class="card-img-top" alt="Graduation Ceremony">
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold">ICST Celebrates Class of [Year] Graduation</h5>
+                            <p class="card-text"><small class="text-muted">May 20, 2025</small></p>
+                            <p class="card-text">Thousands of graduates cross the stage in a memorable ceremony...</p>
+                            <a href="#" class="btn btn-outline-primary btn-sm">Read More</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Event Card 2 -->
+                <div class="col">
+                    <div class="card h-100">
+                        <img src="https://www.utsa.edu/today/2018/images/COETechSymposium340.jpg" class="card-img-top" alt="Tech Symposium">
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold">Annual Tech Innovation Symposium</h5>
+                            <p class="card-text"><small class="text-muted">June 15, 2025 - Main Auditorium</small></p>
+                            <p class="card-text">Join us for a day of groundbreaking tech presentations and workshops...</p>
+                            <a href="#" class="btn btn-outline-primary btn-sm">View Details</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- News Card 3 -->
+                <div class="col">
+                    <div class="card h-100">
+                        <img src="https://media.istockphoto.com/id/1404269031/vector/handshake-in-digital-futuristic-style-the-concept-of-partnership-collaboration-or-teamwork.jpg?s=612x612&w=0&k=20&c=9NqXaD5TYaBG78b213lcmhJvbyCZ07RYj3LGnYJWiUQ=" class="card-img-top" alt="New Partnership">
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold">ICST Announces Strategic Industry Partnership</h5>
+                            <p class="card-text"><small class="text-muted">April 28, 2025</small></p>
+                            <p class="card-text">New collaboration to boost student internships and research opportunities...</p>
+                            <a href="#" class="btn btn-outline-primary btn-sm">Read More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a href="#" class="btn btn-primary mt-5">View All News & Events</a>
+        </div>
+    </section>
+
+    <!-- Call to Action Block -->
+    <section id="apply" class="container cta-block">
+        <h2 class="mb-4">Ready to Shape Your Future?</h2>
+        <p>
+            Join the ICST University family and embark on a journey of discovery, innovation, and personal growth.
+            Your future starts here.
+        </p>
+        <a href="#" class="btn btn-lg me-3">Apply Today</a>
+        <a href="#contact" class="btn btn-lg btn-outline-light">Contact Admissions</a>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 text-center text-md-start mb-3 mb-md-0">
+                    <h5 class="fw-bold mb-3">ICST University</h5>
+                    <p>123 University Drive, City, Country</p>
+                    <p>Phone: (123) 456-7890</p>
+                    <p>Email: info@icst.edu</p>
+                </div>
+                <div class="col-md-4 text-center mb-3 mb-md-0">
+                    <h5 class="fw-bold mb-3">Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Use</a></li>
+                        <li><a href="#">Campus Map</a></li>
+                        <li><a href="#">Careers at ICST</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 text-center text-md-end">
+                    <h5 class="fw-bold mb-3">Connect With Us</h5>
+                    <div class="social-icons">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                    <p class="mt-3">&copy; 2025 ICST University. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS CDN (Bundle with Popper) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" xintegrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>
